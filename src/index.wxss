@@ -1,6 +1,27 @@
 @import "./common.wxss";
 @import "./reset.wxss";
 
-.index {
-  color: green;
+.document-player {
+  position: relative;
+  width: 100%;
+  height: 500rpx;
 }
+.pages {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image {
+  display: none;
+}
+
+.image.active {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+

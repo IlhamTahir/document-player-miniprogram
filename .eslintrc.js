@@ -43,6 +43,10 @@ module.exports = {
         'ignore': ['^[^.]']
       }
     ],
+    "import/extensions": ["error", "ignorePackages", {
+      "ts": "never",
+      "js": "never",
+    }],
     'import/prefer-default-export': 'off',
     'linebreak-style': 'off',
     'no-catch-shadow': 'error',
@@ -53,6 +57,7 @@ module.exports = {
     'no-plusplus': 'off',
     'no-shadow': 'off',
     'no-multi-assign': 'off',
+    'no-unused-vars': 'off',
     'no-underscore-dangle': 'off',
     'node/no-deprecated-api': 'error',
     'node/process-exit-as-throw': 'error',
@@ -87,6 +92,14 @@ module.exports = {
     'no-await-in-loop': 'off',
     'no-restricted-syntax': 'off',
     'promise/always-return': 'off',
+  },
+  settings: {
+      'import/resolver': {
+        node: {
+          extensions: ['.js', '.ts'],
+          moduleDirectory: ['node_modules', 'src/'],
+        },
+      },
   },
   'globals': {
     'window': true,

@@ -1,2 +1,6 @@
-<view class="index other">{{prop}}-{{flag}}</view>
-<other></other>
+<view class="document-player">
+    <view class="pages">
+        <image src="./assets/loading.gif" wx:for="{{imageList}}" mode="aspectFit" data-src="{{item.src}}" wx:key="{{item.page}}" class="image {{item.active ? 'active' : ''}}"></image>
+    </view>
+    <view class="toolbar">{{position.page}}</view>
+</view>

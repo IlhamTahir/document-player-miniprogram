@@ -76,7 +76,7 @@ module.exports = {
     },
     resolve: {
       modules: [src, 'node_modules'],
-      extensions: ['.js', '.json'],
+      extensions: ['.ts', '.js', '.json'],
     },
     plugins: [
       new webpack.DefinePlugin({}),
