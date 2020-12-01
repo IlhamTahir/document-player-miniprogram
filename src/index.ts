@@ -1,4 +1,7 @@
-import {ContentPosition, ImgItem} from './types'
+import {ContentPageChangedEventData, ContentPosition, ImgItem} from './types'
+import PromiseQueue from './promis-queue'
+
+const preloadQueue = new PromiseQueue({concurrency: 1})
 
 Component({
   properties: {
@@ -19,7 +22,6 @@ Component({
     },
     defaultPosition: {
       type: Object,
-      required: false
     }
   },
   data: {
@@ -46,40 +48,45 @@ Component({
         } as ImgItem
         list.push(img)
       }
-      console.log(list)
       this.setData({
         imageList: list
       })
+      if (this.properties.defaultPosition) {
+        this.goto(this.properties.defaultPosition)
+      } else {
+        this.goto({page: 2})
+      }
     },
 
-    async goto(position: ContentPosition) {
+    goto(position: ContentPosition) {
       let page = position.page
       if (page < 1) {
         page = 1
       }
-      if (page > this.imgList.length) {
-        page = this.imgList.length
+      if (page > this.data.imageList.length) {
+        page = this.data.imageList.length
       }
 
-      if (this.position.page === page) {
+      if (this.data.position.page === page) {
         return
       }
 
-      this.position.page = page
+      this.data.position.page = page
 
       let oldActiveImg: ImgItem | undefined
-      for (const img of this.imgList) {
+      for (const img of this.data.imageList) {
         if (img.active) {
           oldActiveImg = img
         }
       }
 
       let newActiveImg: ImgItem | undefined
-      for (const img of this.imgList) {
+      for (const img of this.data.imageList) {
         if (img.page === page) {
           newActiveImg = img
         }
       }
+
 
       if (oldActiveImg && newActiveImg && oldActiveImg.page === newActiveImg.page) {
         return
@@ -88,6 +95,36 @@ Component({
       if (oldActiveImg) {
         oldActiveImg.active = false
       }
+      if (newActiveImg) {
+        newActiveImg.active = true
+
+        if (!newActiveImg.load) {
+          this.loadRemoteImage(newActiveImg)
+        }
+
+        const el = this.$refs['img' + newActiveImg.page] as HTMLImageElement
+
+        this.eventChannel.emit('page-changed', {
+          page,
+          width: el.naturalWidth,
+          height: el.naturalHeight
+        } as ContentPageChangedEventData)
+
+        this.preloadImage(page + 1)
+      }
     },
+    preloadImage(page: number) {
+      if (page > this.data.imageList.length) {
+        return
+      }
+
+      this.data.imageList[page - 1].loadSrc = this.data.imageList[page - 1].src
+      this.setData({
+        imageList: this.data.imageList
+      })
+      preloadQueue.push(() => this.loadRemoteImage(this.data.imageList[page - 1]))
+    },
+
+
   }
 })

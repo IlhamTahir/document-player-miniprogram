@@ -1,1 +1,0 @@
-{"version":3,"file":"other.js","sourceRoot":"","sources":["other.ts"],"names":[],"mappings":"AAAA,SAAS,CAAC;IACR,UAAU,EAAE;QACV,IAAI,EAAE;YACJ,IAAI,EAAE,MAAM;YACZ,KAAK,EAAE,kBAAkB;SAC1B;KACF;IACD,IAAI,EAAE;QACJ,IAAI,EAAE,OAAO;KACd;CACF,CAAC,CAAA"}

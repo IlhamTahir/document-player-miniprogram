@@ -1,6 +1,6 @@
 <view class="document-player">
     <view class="pages">
-        <image src="./assets/loading.gif" wx:for="{{imageList}}" mode="aspectFit" data-src="{{item.src}}" wx:key="{{item.page}}" class="image {{item.active ? 'active' : ''}}"></image>
+        <image bind:src="{{ item.loadSrc }}" wx:for="{{imageList}}" mode="aspectFit" data-src="{{item.src}}" wx:key="{{item.page}}" class="{{ item.active ? 'active' : '' }} {{ !item.load ? 'placeholder':''  }}}"></image>
     </view>
-    <view class="toolbar">{{position.page}}</view>
+    <view class="toolbar" bind:page-changed="helloFunc">{{position.page}}</view>
 </view>
