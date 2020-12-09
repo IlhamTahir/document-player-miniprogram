@@ -1,6 +1,11 @@
+<image src="data:image/png;base64,{{base64}}" mode="aspectFit" style="display: block"/>
 <view class="document-player">
     <view class="pages">
-        <image bind:src="{{ item.loadSrc }}" wx:for="{{imageList}}" mode="aspectFit" data-src="{{item.src}}" wx:key="{{item.page}}" class="{{ item.active ? 'active' : '' }} {{ !item.load ? 'placeholder':''  }}}"></image>
+        <image src="{{ item.load ? item.base64 : './assets/loading.gif' }}" wx:for="{{imageList}}" mode="aspectFit" data-src="{{item.src}}" wx:key="{{item.page}}" class="{{ item.active ? 'active' : '' }} {{ !item.load ? 'placeholder':''  }}}"></image>
     </view>
     <view class="toolbar" bind:page-changed="helloFunc">{{position.page}}</view>
 </view>
+
+<view bindtap="prev">上一页</view>
+<view bindtap="next">下一页</view>
+

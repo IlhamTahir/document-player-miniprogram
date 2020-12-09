@@ -1,7 +1,7 @@
-import {ContentPageChangedEventData, ContentPosition, ImgItem} from './types'
-import PromiseQueue from './promis-queue'
+// eslint-disable-next-line import/extensions
+import {Decrypter} from './aes-decrypter.js'
 
-const preloadQueue = new PromiseQueue({concurrency: 1})
+import {ContentPosition, ImgItem} from './types'
 
 Component({
   properties: {
@@ -26,10 +26,12 @@ Component({
   },
   data: {
     position: {
-      page: 4
+      page: 0
     } as ContentPosition,
     imageList: [] as Array<ImgItem>,
-    isFullscreen: false
+    isFullscreen: false,
+    loadImg: 'http://storage.360buyimg.com/mtd/home/lion1483624894660.jpg',
+    base64: null
   },
   lifetimes: {
     attached() {
@@ -38,26 +40,65 @@ Component({
   },
   methods: {
     init() {
-      // this.data.position.page = 0
       const list = []
       for (let i = 1; i <= this.properties.totalPage; i++) {
         const img = {
           src: this.properties.imageUrlPrefix + i,
           page: i,
-          active: (i === 1),
+          active: false,
+          load: false
         } as ImgItem
         list.push(img)
       }
       this.setData({
         imageList: list
       })
+
       if (this.properties.defaultPosition) {
         this.goto(this.properties.defaultPosition)
       } else {
-        this.goto({page: 2})
+        this.goto({page: 1})
       }
     },
+    _str2uint32(str: string) {
+      const l = str.length
+      const array = new Uint8Array(l)
+      for (let i = 0; i < l; i++) {
+        array[i] = str[i].charCodeAt(0)
+      }
+      return new Uint32Array(array.buffer)
+    },
+    _loadImage(image) {
+      let data
+      const that = this
+      wx.request({
+        url: image.src,
+        responseType: 'arraybuffer',
+        success: result => {
+          data = result.data
+          const key = that._str2uint32(this.properties.encryptKey)
+          const iv = that._str2uint32(this.properties.encryptIv)
 
+          const readerBuffer = new Uint8Array(data)
+          // eslint-disable-next-line handle-callback-err,no-new
+          new Decrypter(readerBuffer, key, iv, (err, decryptedArray) => {
+            image.base64 = 'data:image/png;base64,' + wx.arrayBufferToBase64(decryptedArray.buffer)
+            image.load = true
+            that.data.imageList[image - 1] = image
+            that.setData({
+              imageList: this.data.imageList
+            })
+          })
+        }
+      })
+    },
+    prev() {
+      this.goto({page: this.data.position.page - 1})
+    },
+
+    next() {
+      this.goto({page: this.data.position.page + 1})
+    },
     goto(position: ContentPosition) {
       let page = position.page
       if (page < 1) {
@@ -71,22 +112,21 @@ Component({
         return
       }
 
-      this.data.position.page = page
-
+      this.setData({
+        position: {page}
+      })
       let oldActiveImg: ImgItem | undefined
+      let newActiveImg: ImgItem | undefined
+
       for (const img of this.data.imageList) {
         if (img.active) {
           oldActiveImg = img
         }
-      }
 
-      let newActiveImg: ImgItem | undefined
-      for (const img of this.data.imageList) {
         if (img.page === page) {
           newActiveImg = img
         }
       }
-
 
       if (oldActiveImg && newActiveImg && oldActiveImg.page === newActiveImg.page) {
         return
@@ -94,37 +134,19 @@ Component({
 
       if (oldActiveImg) {
         oldActiveImg.active = false
+        this.data.imageList[oldActiveImg.page - 1] = oldActiveImg
+        this.setData({
+          imageList: this.data.imageList
+        })
       }
+
+
       if (newActiveImg) {
         newActiveImg.active = true
-
         if (!newActiveImg.load) {
-          this.loadRemoteImage(newActiveImg)
+          this._loadImage(newActiveImg)
         }
-
-        const el = this.$refs['img' + newActiveImg.page] as HTMLImageElement
-
-        this.eventChannel.emit('page-changed', {
-          page,
-          width: el.naturalWidth,
-          height: el.naturalHeight
-        } as ContentPageChangedEventData)
-
-        this.preloadImage(page + 1)
       }
-    },
-    preloadImage(page: number) {
-      if (page > this.data.imageList.length) {
-        return
-      }
-
-      this.data.imageList[page - 1].loadSrc = this.data.imageList[page - 1].src
-      this.setData({
-        imageList: this.data.imageList
-      })
-      preloadQueue.push(() => this.loadRemoteImage(this.data.imageList[page - 1]))
-    },
-
-
+    }
   }
 })
