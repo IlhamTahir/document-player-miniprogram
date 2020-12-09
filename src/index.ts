@@ -84,9 +84,9 @@ Component({
           new Decrypter(readerBuffer, key, iv, (err, decryptedArray) => {
             image.base64 = 'data:image/png;base64,' + wx.arrayBufferToBase64(decryptedArray.buffer)
             image.load = true
-            that.data.imageList[image - 1] = image
+            const currentIndex = image.page - 1
             that.setData({
-              imageList: this.data.imageList
+              ['imageList[' + currentIndex + ']']: image,
             })
           })
         }
@@ -134,9 +134,9 @@ Component({
 
       if (oldActiveImg) {
         oldActiveImg.active = false
-        this.data.imageList[oldActiveImg.page - 1] = oldActiveImg
+        const currentIndex = oldActiveImg.page - 1
         this.setData({
-          imageList: this.data.imageList
+          ['imageList[' + currentIndex + ']']: oldActiveImg,
         })
       }
 
@@ -145,6 +145,11 @@ Component({
         newActiveImg.active = true
         if (!newActiveImg.load) {
           this._loadImage(newActiveImg)
+        } else {
+          const currentIndex = newActiveImg.page - 1
+          this.setData({
+            ['imageList[' + currentIndex + ']']: newActiveImg
+          })
         }
       }
     }
