@@ -1,7 +1,9 @@
+@import "assets/icon.wxss";
+
 .document-player {
   position: relative;
   width: 100%;
-  height: 500rpx;
+  height: 500px;
 }
 
 .pages {
@@ -33,3 +35,36 @@ image.placeholder {
   height: 100px!important;
 }
 
+.toolbar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 50px;
+  background: #f3f3f3;
+  border-top: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #666;
+}
+
+.toolbar view {
+  display: flex;
+}
+
+.toolbar .iconfont {
+  padding: 10px 10px;
+  border-radius: 5px;
+}
+
+.toolbar .iconfont:hover {
+  background: #ddd;
+  cursor: pointer;
+}
+
+.toolbar .current-page {
+  color: #666;
+  margin-right: 5px;
+  line-height: 35px;
+}

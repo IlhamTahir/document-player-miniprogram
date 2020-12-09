@@ -3,9 +3,19 @@
     <view class="pages">
         <image src="{{ item.load ? item.base64 : './assets/loading.gif' }}" wx:for="{{imageList}}" mode="aspectFit" data-src="{{item.src}}" wx:key="{{item.page}}" class="{{ item.active ? 'active' : '' }} {{ !item.load ? 'placeholder':''  }}}"></image>
     </view>
-    <view class="toolbar" bind:page-changed="helloFunc">{{position.page}}</view>
+    <view class="toolbar">
+        <view>
+
+        </view>
+        <view>
+            <view class="iconfont icon-page-first" bind:tap="goto({page:1})"></view>
+            <view class="iconfont icon-page-prev" bind:tap="prev"></view>
+            <view class="iconfont icon-page-next" bind:tap="next"></view>
+            <view class="iconfont icon-page-last" bind:tap="goto({page: totalPage})"></view>
+        </view>
+        <view>
+            <view class="current-page">{{ position.page + '/' + totalPage }}</view>
+            <view class="iconfont icon-fullscreen-exit"></view>
+        </view>
+    </view>
 </view>
-
-<view bindtap="prev">上一页</view>
-<view bindtap="next">下一页</view>
-
