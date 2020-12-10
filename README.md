@@ -1,17 +1,20 @@
-# miniprogram-custom-component
+# document-player-miniprogram
 
-小程序自定义组件开发模板：
+小程序文档播放器
 
-* 支持使用 less 语法编写 wxss 文件
-* 使用 webpack 构建 js
-* 支持自定义组件单元测试
-* 支持 eslint
-* 支持多入口构建
+## 特性
+* 支持加密图片解密播放
+* 支持非加密图片播放
+* 支持双指缩放
+* [Todo] 支持假全屏
+* [Todo] 支持滚动切换页面
+* [Todo] 支持HTML5格式文档
+* [Todo] 支持陀螺仪横屏
 
 ## 使用
 
-* 使用[命令行工具](https://github.com/wechat-miniprogram/miniprogram-cli)进行初始化
-* 直接从 github 上 clone 下来
+`git clone git@coding.codeages.work:he/document-player-miniprogram.git`
+
 
 ## 开发
 
