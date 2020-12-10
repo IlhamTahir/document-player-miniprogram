@@ -1,4 +1,3 @@
-<image src="data:image/png;base64,{{base64}}" mode="aspectFit" style="display: block"/>
 <view class="document-player">
     <view class="pages">
         <image src="{{ item.load ? item.base64 : './assets/loading.gif' }}" wx:for="{{imageList}}" mode="aspectFit" data-src="{{item.src}}" wx:key="{{item.page}}" class="{{ item.active ? 'active' : '' }} {{ !item.load ? 'placeholder':''  }}}"></image>

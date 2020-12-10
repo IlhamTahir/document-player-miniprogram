@@ -22,7 +22,10 @@ Component({
     },
     defaultPosition: {
       type: Object,
-    }
+    },
+    imageData: {
+      type: Array
+    },
   },
   data: {
     position: {
@@ -31,7 +34,8 @@ Component({
     imageList: [] as Array<ImgItem>,
     isFullscreen: false,
     loadImg: 'http://storage.360buyimg.com/mtd/home/lion1483624894660.jpg',
-    base64: null
+    base64: null,
+    isEncrypted: true
   },
   lifetimes: {
     attached() {
@@ -40,6 +44,18 @@ Component({
   },
   methods: {
     init() {
+      if (this.properties.imageData.length) {
+        this._initNoEncryptData()
+      } else {
+        this._initEncryptData()
+      }
+      if (this.properties.defaultPosition) {
+        this.goto(this.properties.defaultPosition)
+      } else {
+        this.goto({page: 1})
+      }
+    },
+    _initEncryptData() {
       const list = []
       for (let i = 1; i <= this.properties.totalPage; i++) {
         const img = {
@@ -51,14 +67,25 @@ Component({
         list.push(img)
       }
       this.setData({
-        imageList: list
+        imageList: list,
+        isEncrypted: true
       })
-
-      if (this.properties.defaultPosition) {
-        this.goto(this.properties.defaultPosition)
-      } else {
-        this.goto({page: 1})
+    },
+    _initNoEncryptData() {
+      const list = []
+      for (let i = 0; i < this.properties.imageData.length; i++) {
+        const img = {
+          src: this.properties.imageData[i],
+          page: (i + 1),
+          active: false,
+          load: false
+        } as ImgItem
+        list.push(img)
       }
+      this.setData({
+        imageList: list,
+        isEncrypted: false
+      })
     },
     _str2uint32(str: string) {
       const l = str.length
@@ -76,19 +103,27 @@ Component({
         responseType: 'arraybuffer',
         success: result => {
           data = result.data
-          const key = that._str2uint32(this.properties.encryptKey)
-          const iv = that._str2uint32(this.properties.encryptIv)
-
-          const readerBuffer = new Uint8Array(data)
-          // eslint-disable-next-line handle-callback-err,no-new
-          new Decrypter(readerBuffer, key, iv, (err, decryptedArray) => {
-            image.base64 = 'data:image/png;base64,' + wx.arrayBufferToBase64(decryptedArray.buffer)
+          if (that.data.isEncrypted) {
+            const key = that._str2uint32(this.properties.encryptKey)
+            const iv = that._str2uint32(this.properties.encryptIv)
+            const readerBuffer = new Uint8Array(data)
+            // eslint-disable-next-line handle-callback-err,no-new
+            new Decrypter(readerBuffer, key, iv, (err, decryptedArray) => {
+              image.base64 = 'data:image/png;base64,' + wx.arrayBufferToBase64(decryptedArray.buffer)
+              image.load = true
+              const currentIndex = image.page - 1
+              that.setData({
+                ['imageList[' + currentIndex + ']']: image,
+              })
+            })
+          } else {
+            image.base64 = 'data:image/png;base64,' + wx.arrayBufferToBase64(data)
             image.load = true
             const currentIndex = image.page - 1
             that.setData({
               ['imageList[' + currentIndex + ']']: image,
             })
-          })
+          }
         }
       })
     },
