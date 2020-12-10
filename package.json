@@ -1,6 +1,6 @@
 {
   "name": "document-player-miniprogram",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "",
   "main": "miniprogram_dist/index.js",
   "scripts": {
