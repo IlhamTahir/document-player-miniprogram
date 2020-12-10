@@ -1,20 +1,26 @@
-<view class="document-player">
+<view class="document-player {{ isFullscreen ? 'fullscreen' : '' }}">
     <view class="pages">
-        <image src="{{ item.load ? item.base64 : './assets/loading.gif' }}" wx:for="{{imageList}}" mode="aspectFit" data-src="{{item.src}}" wx:key="{{item.page}}" class="{{ item.active ? 'active' : '' }} {{ !item.load ? 'placeholder':''  }}}"></image>
+        <scale-image src="{{ item.load ? item.base64 : './assets/loading.gif' }}"
+                     wx:for="{{imageList}}"
+                     data-src="{{item.src}}"
+                     wx:key="{{item.page}}"
+                     class="{{ item.active ? 'active' : '' }} {{ !item.load ? 'placeholder':''  }}}"
+        ></scale-image>
     </view>
     <view class="toolbar">
         <view>
 
         </view>
         <view>
-            <view class="iconfont icon-page-first" bind:tap="goto({page:1})"></view>
+            <view class="iconfont icon-page-first" hover-class='icon-hover' bind:tap="goto({page:1})"></view>
             <view class="iconfont icon-page-prev" bind:tap="prev"></view>
             <view class="iconfont icon-page-next" bind:tap="next"></view>
             <view class="iconfont icon-page-last" bind:tap="goto({page: totalPage})"></view>
         </view>
         <view>
             <view class="current-page">{{ position.page + '/' + totalPage }}</view>
-            <view class="iconfont icon-fullscreen-exit"></view>
+            <view class="iconfont icon-fullscreen-exit" wx:if="{{isFullscreen}}" style="margin-right: 5px;" bind:tap="onFullScreen"></view>
+            <view class="iconfont icon-fullscreen" wx:else style="margin-right: 5px;" bind:tap="onFullScreen"></view>
         </view>
     </view>
 </view>

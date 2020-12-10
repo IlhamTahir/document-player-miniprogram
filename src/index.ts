@@ -33,8 +33,6 @@ Component({
     } as ContentPosition,
     imageList: [] as Array<ImgItem>,
     isFullscreen: false,
-    loadImg: 'http://storage.360buyimg.com/mtd/home/lion1483624894660.jpg',
-    base64: null,
     isEncrypted: true
   },
   lifetimes: {
@@ -54,6 +52,11 @@ Component({
       } else {
         this.goto({page: 1})
       }
+    },
+    onFullScreen() {
+      this.setData({
+        isFullscreen: !this.data.isFullscreen
+      })
     },
     _initEncryptData() {
       const list = []
@@ -178,13 +181,12 @@ Component({
 
       if (newActiveImg) {
         newActiveImg.active = true
+        const currentIndex = newActiveImg.page - 1
+        this.setData({
+          ['imageList[' + currentIndex + ']']: newActiveImg
+        })
         if (!newActiveImg.load) {
           this._loadImage(newActiveImg)
-        } else {
-          const currentIndex = newActiveImg.page - 1
-          this.setData({
-            ['imageList[' + currentIndex + ']']: newActiveImg
-          })
         }
       }
     }
