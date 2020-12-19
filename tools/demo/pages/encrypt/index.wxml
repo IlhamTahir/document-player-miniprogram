@@ -1,4 +1,8 @@
-<document-player imageUrlPrefix="http://ese4a9b9c5d22x-pub.pub.qiqiuyun.net/book-file-2/20201121100156-52sddhg6fvwokogg/34ec95b38adbe542_img"
+<document-player class="document-area" imageUrlPrefix="http://ese4a9b9c5d22x-pub.pub.qiqiuyun.net/book-file-2/20201121100156-52sddhg6fvwokogg/34ec95b38adbe542_img"
                      encryptKey="de1816b65c0d4c99"
                      encryptIv="559aedc445444811"
-                     totalPage="4"></document-player>
+                     totalPage="12"
+                bind:page-change="onChange"></document-player>
+<button bind:tap="goSeven">跳转至第7页</button>
+<button bind:tap="goFirst">回到第1页</button>
+

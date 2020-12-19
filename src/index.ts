@@ -33,14 +33,29 @@ Component({
     } as ContentPosition,
     imageList: [] as Array<ImgItem>,
     isFullscreen: false,
-    isEncrypted: true
+    isEncrypted: true,
+    width: 0,
+    height: 0
   },
   lifetimes: {
     attached() {
       this.init()
+      this.resize()
     }
   },
   methods: {
+    resize() {
+      const that = this
+      const query = this.createSelectorQuery()
+      query.select('.pages').boundingClientRect()
+      query.exec(function (res) {
+        console.log(res)
+        that.setData({
+          width: res[0].width,
+          height: res[0].height
+        })
+      })
+    },
     init() {
       if (this.properties.imageData.length) {
         this._initNoEncryptData()
@@ -57,6 +72,7 @@ Component({
       this.setData({
         isFullscreen: !this.data.isFullscreen
       })
+      this.resize()
     },
     _initEncryptData() {
       const list = []
@@ -153,6 +169,7 @@ Component({
       this.setData({
         position: {page}
       })
+      this.triggerEvent('page-change', {page})
       let oldActiveImg: ImgItem | undefined
       let newActiveImg: ImgItem | undefined
 

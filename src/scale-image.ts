@@ -2,7 +2,23 @@ Component({
   externalClasses: ['inner-class'],
   properties: {
     src: String,
-    custom_class: String
+    custom_class: String,
+    width: {
+      type: String,
+      observer(width) {
+        // @ts-ignore
+        const height = (width * this.data.touch.baseWidth) / this.data.touch.baseHeight
+        this.setData({
+          'touch.baseWidth': width,
+          'touch.baseHeight': height,
+          'touch.scaleWidth': width,
+          'touch.scaleHeight': height
+        })
+      }
+    },
+    height: {
+      type: String
+    }
   },
   data: {
     touch: {
@@ -58,9 +74,8 @@ Component({
       })
     },
     bindload(e) {
-      // bindload 这个api是<image>组件的api类似<img>的onload属性
-      const width = wx.getSystemInfoSync().windowWidth
-      const height = (width * e.detail.height) / e.detail.width
+      const height = this.properties.height
+      const width = (height * e.detail.width) / e.detail.height
       this.setData({
         'touch.baseWidth': width,
         'touch.baseHeight': height,

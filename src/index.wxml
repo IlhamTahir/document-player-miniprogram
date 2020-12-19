@@ -1,15 +1,16 @@
 <view class="document-player {{ isFullscreen ? 'fullscreen' : '' }}">
     <view class="pages">
-        <scale-image src="{{ item.load ? item.base64 : './assets/loading.gif' }}"
+        <scale-image wx:if="{{width}}" src="{{ item.load ? item.base64 : './assets/loading.gif' }}"
                      wx:for="{{imageList}}"
                      data-src="{{item.src}}"
                      wx:key="{{item.page}}"
+                     width="{{width}}"
+                     height="{{height}}"
                      class="{{ item.active ? 'active' : '' }} {{ !item.load ? 'placeholder':''  }}}"
         ></scale-image>
     </view>
     <view class="toolbar">
         <view>
-
         </view>
         <view>
             <view class="iconfont icon-page-first" hover-class='icon-hover' bind:tap="goto({page:1})"></view>
