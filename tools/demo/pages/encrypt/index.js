@@ -1,4 +1,14 @@
 Page({
+  data: {
+    playPages: [
+      1,
+      4,
+      5,
+      6,
+      12,
+      25
+    ]
+  },
   onLoad(query) {
   },
   onReady() {

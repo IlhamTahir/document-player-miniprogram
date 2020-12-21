@@ -1,4 +1,5 @@
 .document-area {
     width: 500rpx;
     height: 300rpx;
+    display: block;
 }

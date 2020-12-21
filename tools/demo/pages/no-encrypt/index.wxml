@@ -1,3 +1,1 @@
-<document-player imageData="{{ imageData }}"
-                 totalPage="{{ imageData.length }}"></document-player>
-
+<document-player class="document-area" imageData="{{ imageData }}" totalPage="{{ imageData.length }}" />

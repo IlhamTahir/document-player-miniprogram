@@ -26,6 +26,9 @@ Component({
     imageData: {
       type: Array
     },
+    playPages: {
+      type: Array
+    }
   },
   data: {
     position: {
@@ -39,7 +42,7 @@ Component({
   },
   lifetimes: {
     attached() {
-      this.init()
+      this._init()
       this.resize()
     }
   },
@@ -49,14 +52,13 @@ Component({
       const query = this.createSelectorQuery()
       query.select('.pages').boundingClientRect()
       query.exec(function (res) {
-        console.log(res)
         that.setData({
           width: res[0].width,
           height: res[0].height
         })
       })
     },
-    init() {
+    _init() {
       if (this.properties.imageData.length) {
         this._initNoEncryptData()
       } else {
@@ -76,15 +78,15 @@ Component({
     },
     _initEncryptData() {
       const list = []
-      for (let i = 1; i <= this.properties.totalPage; i++) {
+      this.properties.playPages.forEach((item, index) => {
         const img = {
-          src: this.properties.imageUrlPrefix + i,
-          page: i,
+          src: this.properties.imageUrlPrefix + item,
+          page: (index + 1),
           active: false,
           load: false
         } as ImgItem
         list.push(img)
-      }
+      })
       this.setData({
         imageList: list,
         isEncrypted: true

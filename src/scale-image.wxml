@@ -1,5 +1,6 @@
 <scroll-view class="container" style="width: {{ touch.baseWidth }};height: {{ touch.baseHeight }};" scroll-x="true" scroll-y="true">
-    <view bindtouchmove="touchmoveCallback" bindtouchstart="touchstartCallback">
+    <view style="width: 100%; height: 100%; display: flex;" bindtouchmove="touchmoveCallback" bindtouchstart="touchstartCallback">
         <image src="{{ src }}" style="width: {{ touch.scaleWidth }}px;height: {{ touch.scaleHeight }}px" bindload="bindload"></image>
     </view>
 </scroll-view>
+

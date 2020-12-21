@@ -1,29 +1,12 @@
 {
   "pages":[
+    "pages/index/index",
     "pages/encrypt/index",
     "pages/no-encrypt/index",
     "pages/scale-image/index"
   ],
   "window":{
     "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle":"black"
-  },
-  "tabBar": {
-    "list": [
-      {
-        "pagePath": "pages/encrypt/index",
-        "text": "加密"
-      },
-      {
-        "pagePath": "pages/no-encrypt/index",
-        "text": "非加密"
-      },
-      {
-        "pagePath": "pages/scale-image/index",
-        "text": "缩放"
-      }
-    ]
+    "navigationStyle": "custom"
   }
 }

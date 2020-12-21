@@ -1,0 +1,10 @@
+.action-area {
+    display: flex;
+    flex-direction: column;
+    margin-top: 100rpx;
+    padding: 0 40rpx;
+}
+button {
+    margin-bottom: 80rpx;
+    width: 100%;
+}

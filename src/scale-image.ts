@@ -6,14 +6,7 @@ Component({
     width: {
       type: String,
       observer(width) {
-        // @ts-ignore
-        const height = (width * this.data.touch.baseWidth) / this.data.touch.baseHeight
-        this.setData({
-          'touch.baseWidth': width,
-          'touch.baseHeight': height,
-          'touch.scaleWidth': width,
-          'touch.scaleHeight': height
-        })
+        this.resize()
       }
     },
     height: {
@@ -34,9 +27,7 @@ Component({
     touchstartCallback(e) {
       // 单手指缩放开始，也不做任何处理
       if (e.touches.length !== 2) return
-      // 注意touchstartCallback 真正代码的开始
-      // 一开始我并没有这个回调函数，会出现缩小的时候有瞬间被放大过程的bug
-      // 当两根手指放上去的时候，就将distance 初始化。
+
       const xMove = e.touches[1].clientX - e.touches[0].clientX
       const yMove = e.touches[1].clientY - e.touches[0].clientY
       const distance = Math.sqrt(xMove * xMove + yMove * yMove)
@@ -74,14 +65,39 @@ Component({
       })
     },
     bindload(e) {
-      const height = this.properties.height
-      const width = (height * e.detail.width) / e.detail.height
+      const targetWidth = e.detail.width
+      const targetHeight = e.detail.height
+      if (targetWidth < targetHeight) {
+        this._resizeToWidth(targetWidth, targetHeight)
+      } else {
+        this._resizeToHeight(targetWidth, targetHeight)
+      }
+    },
+    resize() {
+      const targetWidth = this.data.touch.baseWidth
+      const targetHeight = this.data.touch.baseHeight
+      console.log(targetWidth < targetHeight)
+      this._resizeToWidth(targetWidth, targetHeight)
+    },
+    _resizeToWidth(targetWidth, targetHeight) {
+      const width = this.properties.width
+      const height = (width * targetWidth) / targetHeight
       this.setData({
         'touch.baseWidth': width,
         'touch.baseHeight': height,
         'touch.scaleWidth': width,
         'touch.scaleHeight': height
       })
-    }
+    },
+    _resizeToHeight(targetWidth, targetHeight) {
+      const height = this.properties.height
+      const width = (height * targetHeight) / targetWidth
+      this.setData({
+        'touch.baseWidth': width,
+        'touch.baseHeight': height,
+        'touch.scaleWidth': width,
+        'touch.scaleHeight': height
+      })
+    },
   }
 })

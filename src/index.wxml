@@ -9,7 +9,7 @@
                      class="{{ item.active ? 'active' : '' }} {{ !item.load ? 'placeholder':''  }}}"
         ></scale-image>
     </view>
-    <view class="toolbar">
+    <view wx:if="{{!isFullscreen}}" class="toolbar">
         <view>
         </view>
         <view>
