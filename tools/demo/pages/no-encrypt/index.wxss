@@ -1,5 +1,6 @@
 .document-area {
-    width: 500rpx;
-    height: 300rpx;
+    margin-top: 80rpx;
+    width: 600rpx;
+    height: 500rpx;
     display: block;
 }
