@@ -6,7 +6,7 @@
                      wx:key="{{item.page}}"
                      width="{{width}}"
                      height="{{height}}"
-                     class="{{ item.active ? 'active' : '' }} {{ !item.load ? 'placeholder':''  }}}"
+                     class="{{ item.active ? 'active' : '' }}"
         ></scale-image>
     </view>
     <view wx:if="{{!isFullscreen}}" class="toolbar">
@@ -24,26 +24,24 @@
             <view class="iconfont icon-fullscreen" wx:else style="margin-right: 5px;" bind:tap="onFullScreen"></view>
         </view>
     </view>
-    <view wx:if="{{isFullscreen}}" class="fullscreen-toolbar">
-        <view class="float-button-box" bind:tap="onFullScreen">
+        <view wx:if="{{isFullscreen}}" class="float-button-box" bind:tap="onFullScreen">
             <view class="iconfont icon-fullscreen-exit"></view>
             <view class="box-background"></view>
         </view>
 
-        <view class="pages-float-button-box">
+        <view wx:if="{{isFullscreen}}" class="pages-float-button-box">
             <view class="current-page">{{ position.page + '/' + totalPage }}</view>
             <view class="box-background"></view>
         </view>
 
 
-        <view class="next-float-button-box">
+        <view wx:if="{{isFullscreen}}" class="next-float-button-box">
             <view class="iconfont icon-page-next" bind:tap="next"></view>
             <view class="box-background"></view>
         </view>
 
-        <view class="prev-float-button-box">
+        <view wx:if="{{isFullscreen}}" class="prev-float-button-box">
             <view class="iconfont icon-page-prev" bind:tap="prev"></view>
             <view class="box-background"></view>
         </view>
-    </view>
 </view>

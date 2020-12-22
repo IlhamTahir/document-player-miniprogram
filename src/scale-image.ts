@@ -14,13 +14,19 @@ Component({
     }
   },
   data: {
+    isLoading: true,
     touch: {
       distance: 0,
       scale: 1,
-      baseWidth: null,
-      baseHeight: null,
+      baseWidth: '50%',
+      baseHeight: '50%',
       scaleWidth: null,
       scaleHeight: null
+    }
+  },
+  lifetimes: {
+    attached() {
+      this._resizeToWidth(this.properties.width, this.properties.height)
     }
   },
   methods: {
@@ -65,6 +71,11 @@ Component({
       })
     },
     bindload(e) {
+      if (this.data.src !== './assets/loading.gif') {
+        this.setData({
+          isLoading: false
+        })
+      }
       const targetWidth = e.detail.width
       const targetHeight = e.detail.height
       if (targetWidth < targetHeight) {

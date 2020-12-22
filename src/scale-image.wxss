@@ -4,3 +4,9 @@
     display: flex;
     background: #3d454c;
 }
+
+.loading {
+    width: 200rpx!important;
+    height: 200rpx!important;
+    margin: auto!important;
+}
