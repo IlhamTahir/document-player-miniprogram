@@ -7,5 +7,7 @@
     totalPage="{{ playPages.length }}"
     bind:page-change="onChange"></document-player>
 <button bind:tap="goSeven">跳转至第7页</button>
-<button bind:tap="goFirst">回到第1页</button>
+<button bind:tap="goFirstPage">回到第1页</button>
+
+<switch checked="{{ showPageChange }}" bindchange="toggleShowPage">显示页面切换监听</switch>
 
