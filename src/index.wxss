@@ -8,7 +8,9 @@
 }
 
 .fullscreen {
-  position: absolute;
+  position: fixed;
+    top: 0;
+    left: 0;
   width: 100%;
   min-height: 100vh;
   z-index: 999;
@@ -48,14 +50,14 @@ scale-image {
   display: flex;
 }
 
-.toolbar .iconfont {
+.toolbar .aplisin-font {
   padding: 10px 10px;
   border-radius: 5px;
 }
-.toolbar .iconfont:focus {
+.toolbar .aplisin-font:focus {
   background: #ddd;
 }
-/*.toolbar .iconfont {*/
+/*.toolbar .aplisin-font {*/
 /*  background: #ddd;*/
 /*  cursor: pointer;*/
 /*}*/

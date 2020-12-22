@@ -1,6 +1,6 @@
 {
   "name": "document-player-miniprogram",
-  "version": "1.3.0",
+  "version": "1.3.4",
   "description": "",
   "main": "miniprogram_dist/index.js",
   "scripts": {
@@ -14,7 +14,8 @@
     "test-debug": "node --inspect-brk ./node_modules/jest/bin/jest.js --runInBand --bail",
     "coverage": "jest ./test/* --coverage --bail",
     "lint": "eslint \"src/**/*.js\" --fix",
-    "lint-tools": "eslint \"tools/**/*.js\" --rule \"import/no-extraneous-dependencies: false\" --fix"
+    "lint-tools": "eslint \"tools/**/*.js\" --rule \"import/no-extraneous-dependencies: false\" --fix",
+    "publish-to-npm": "npm publish --registry  https://registry.npmjs.org/"
   },
   "miniprogram": "miniprogram_dist",
   "jest": {

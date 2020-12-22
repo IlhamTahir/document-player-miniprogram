@@ -15,22 +15,22 @@
     </view>
     <view wx:if="{{!isFullscreen}}" class="toolbar">
         <view>
-            <view wx:if="{{toc.length}}" class="iconfont icon-page-list" bind:tap="toggleToc"></view>
+            <view wx:if="{{toc.length}}" class="aplisin-font icon-page-list" bind:tap="toggleToc"></view>
         </view>
         <view>
-            <view class="iconfont icon-page-first" hover-class='icon-hover' bind:tap="goFirst"></view>
-            <view class="iconfont icon-page-prev" bind:tap="prev"></view>
-            <view class="iconfont icon-page-next" bind:tap="next"></view>
-            <view class="iconfont icon-page-last" bind:tap="goLast"></view>
+            <view class="aplisin-font icon-page-first" hover-class='icon-hover' bind:tap="goFirst"></view>
+            <view class="aplisin-font icon-page-prev" bind:tap="prev"></view>
+            <view class="aplisin-font icon-page-next" bind:tap="next"></view>
+            <view class="aplisin-font icon-page-last" bind:tap="goLast"></view>
         </view>
         <view>
             <view class="current-page">{{ position.page + '/' + totalPage }}</view>
-            <view class="iconfont icon-fullscreen-exit" wx:if="{{isFullscreen}}" style="margin-right: 5px;" bind:tap="onFullScreen"></view>
-            <view class="iconfont icon-fullscreen" wx:else style="margin-right: 5px;" bind:tap="onFullScreen"></view>
+            <view class="aplisin-font icon-fullscreen-exit" wx:if="{{isFullscreen}}" style="margin-right: 5px;" bind:tap="onFullScreen"></view>
+            <view class="aplisin-font icon-fullscreen" wx:else style="margin-right: 5px;" bind:tap="onFullScreen"></view>
         </view>
     </view>
     <view wx:if="{{isFullscreen}}" class="float-button-box" bind:tap="onFullScreen">
-        <view class="iconfont icon-fullscreen-exit"></view>
+        <view class="aplisin-font icon-fullscreen-exit"></view>
         <view class="box-background"></view>
     </view>
 
@@ -41,10 +41,10 @@
 
 
     <view wx:if="{{isFullscreen}}" class="next-float-button-box">
-        <view class="iconfont icon-page-next" bind:tap="next"></view>
+        <view class="aplisin-font icon-page-next" bind:tap="next"></view>
     </view>
 
     <view wx:if="{{isFullscreen}}" class="prev-float-button-box">
-        <view class="iconfont icon-page-prev" bind:tap="prev"></view>
+        <view class="aplisin-font icon-page-prev" bind:tap="prev"></view>
     </view>
 </view>
