@@ -78,15 +78,28 @@ Component({
     },
     _initEncryptData() {
       const list = []
-      this.properties.playPages.forEach((item, index) => {
-        const img = {
-          src: this.properties.imageUrlPrefix + item,
-          page: (index + 1),
-          active: false,
-          load: false
-        } as ImgItem
-        list.push(img)
-      })
+      if (this.properties.playPages.length) {
+        this.properties.playPages.forEach((item, index) => {
+          const img = {
+            src: this.properties.imageUrlPrefix + item,
+            page: (index + 1),
+            active: false,
+            load: false
+          } as ImgItem
+          list.push(img)
+        })
+      } else {
+        for (let i = 1; i <= this.properties.totalPage; i++) {
+          const img = {
+            src: this.properties.imageUrlPrefix + i,
+            page: i,
+            active: false,
+            load: false
+          } as ImgItem
+          list.push(img)
+        }
+      }
+
       this.setData({
         imageList: list,
         isEncrypted: true

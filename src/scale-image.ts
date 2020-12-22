@@ -45,7 +45,6 @@ Component({
       const touch = this.data.touch
       // 单手指缩放我们不做任何操作
       if (e.touches.length !== 2) return
-      console.log('双手指运动')
       const xMove = e.touches[1].clientX - e.touches[0].clientX
       const yMove = e.touches[1].clientY - e.touches[0].clientY
       // 新的 ditance
