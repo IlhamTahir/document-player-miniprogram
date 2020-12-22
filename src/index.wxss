@@ -117,45 +117,39 @@ scale-image {
 
 
 .next-float-button-box {
-    position: absolute;
-    bottom: 50%;
-    right: 30rpx;
-    width: 60rpx;
-    height: 240rpx;
-    z-index: 1;
+    position: fixed;
+    z-index: 99;
+    top: 50%;
+    right: -40rpx;
+    margin-top: -50rpx;
+    padding-left: 14rpx;
+    height: 100rpx;
+    width: 100rpx;
+    line-height: 100rpx;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 50%;
+    box-sizing: border-box;
+    color: #9a9a9a;
 }
 
 
-.next-float-button-box .icon-page-next {
-    position: absolute;
-    z-index: 1;
-    color: #fff;
-    font-size: 50rpx;
-    text-align: center;
-    line-height: 240rpx;
-    width: 60rpx;
-    height: 240rpx;
-}
 
 .prev-float-button-box {
-    position: absolute;
-    bottom: 50%;
-    left: 30rpx;
-    width: 60rpx;
-    height: 240rpx;
-    z-index: 1;
+    position: fixed;
+    z-index: 99;
+    top: 50%;
+    left: -40rpx;
+    margin-top: -50rpx;
+    padding-right: 14rpx;
+    height: 100rpx;
+    width: 100rpx;
+    line-height: 100rpx;
+    text-align: right;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 50%;
+    box-sizing: border-box;
+    color: #9a9a9a;
 }
 
-
-.prev-float-button-box .icon-page-prev {
-    position: absolute;
-    z-index: 1;
-    color: #fff;
-    font-size: 50rpx;
-    text-align: center;
-    line-height: 240rpx;
-    width: 60rpx;
-    height: 240rpx;
-}
 
 
