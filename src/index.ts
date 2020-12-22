@@ -155,6 +155,12 @@ Component({
     next() {
       this.goto({page: this.data.position.page + 1})
     },
+    goFirst() {
+      this.goto({page: 1})
+    },
+    goLast() {
+      this.goto({page: this.data.totalPage})
+    },
     goto(position: ContentPosition) {
       let page = position.page
       if (page < 1) {

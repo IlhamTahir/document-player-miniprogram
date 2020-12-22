@@ -13,15 +13,37 @@
         <view>
         </view>
         <view>
-            <view class="iconfont icon-page-first" hover-class='icon-hover' bind:tap="goto({page:1})"></view>
+            <view class="iconfont icon-page-first" hover-class='icon-hover' bind:tap="goFirst"></view>
             <view class="iconfont icon-page-prev" bind:tap="prev"></view>
             <view class="iconfont icon-page-next" bind:tap="next"></view>
-            <view class="iconfont icon-page-last" bind:tap="goto({page: totalPage})"></view>
+            <view class="iconfont icon-page-last" bind:tap="goLast"></view>
         </view>
         <view>
             <view class="current-page">{{ position.page + '/' + totalPage }}</view>
             <view class="iconfont icon-fullscreen-exit" wx:if="{{isFullscreen}}" style="margin-right: 5px;" bind:tap="onFullScreen"></view>
             <view class="iconfont icon-fullscreen" wx:else style="margin-right: 5px;" bind:tap="onFullScreen"></view>
+        </view>
+    </view>
+    <view wx:if="{{isFullscreen}}" class="fullscreen-toolbar">
+        <view class="float-button-box" bind:tap="onFullScreen">
+            <view class="iconfont icon-fullscreen-exit"></view>
+            <view class="box-background"></view>
+        </view>
+
+        <view class="pages-float-button-box">
+            <view class="current-page">{{ position.page + '/' + totalPage }}</view>
+            <view class="box-background"></view>
+        </view>
+
+
+        <view class="next-float-button-box">
+            <view class="iconfont icon-page-next" bind:tap="next"></view>
+            <view class="box-background"></view>
+        </view>
+
+        <view class="prev-float-button-box">
+            <view class="iconfont icon-page-prev" bind:tap="prev"></view>
+            <view class="box-background"></view>
         </view>
     </view>
 </view>
