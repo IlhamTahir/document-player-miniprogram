@@ -38,15 +38,62 @@ Component({
     isFullscreen: false,
     isEncrypted: true,
     width: 0,
-    height: 0
+    height: 0,
+    toc: [
+      {
+        title: '第二十章 抗肿瘤药物 (Anticancer Drugs)',
+        key: 1,
+        children: [{
+          title: '第一节 直接作用',
+          key: 1,
+          children: [{title: '一、烷化剂', key: 4, children: []}]
+        }]
+      },
+      {
+        title: '第二十一章 你好吗？',
+        key: 5,
+        children: []
+      }
+    ],
+    showToc: false
   },
   lifetimes: {
     attached() {
       this._init()
       this.resize()
+      this.setData({
+        toc: this.reBuildToc()
+      })
     }
   },
   methods: {
+    handlePage(e) {
+      console.log(e)
+      this.goto({page: e.currentTarget.dataset.page})
+    },
+    reBuildToc() {
+      const list = []
+      const toc = this.data.toc
+      toc.forEach(item => {
+        list.push({title: item.title, key: item.key, type: 'part'})
+        if (item.children.length) {
+          item.children.forEach(item2 => {
+            list.push({title: item2.title, key: item2.key, type: 'chapter'})
+            if (item2.children.length) {
+              item2.children.forEach(item3 => {
+                list.push({title: item3.title, key: item3.key, type: 'unit'})
+              })
+            }
+          })
+        }
+      })
+      return list
+    },
+    toggleToc() {
+      this.setData({
+        showToc: !this.data.showToc
+      })
+    },
     resize() {
       const that = this
       const query = this.createSelectorQuery()

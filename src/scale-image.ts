@@ -87,7 +87,6 @@ Component({
     resize() {
       const targetWidth = this.data.touch.baseWidth
       const targetHeight = this.data.touch.baseHeight
-      console.log(targetWidth < targetHeight)
       this._resizeToWidth(targetWidth, targetHeight)
     },
     _resizeToWidth(targetWidth, targetHeight) {

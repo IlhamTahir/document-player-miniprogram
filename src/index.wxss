@@ -151,5 +151,40 @@ scale-image {
     color: #9a9a9a;
 }
 
+.table-of-content {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    z-index: 99999;
+    background: #000;
+    opacity: 0.8;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding: 180rpx 30rpx;
+    animation: showTable 0.5s;
+}
+
+.table-of-content .content-item {
+    width: 100%;
+    height: 80rpx;
+    line-height: 80rpx;
+    border-bottom: 1rpx solid #999999;
+    font-size: 30rpx;
+    font-weight: bold;
+}
 
 
+.content-item.chapter {
+    text-indent: 50rpx;
+}
+.content-item.unit {
+    text-indent: 100rpx;
+}
+
+@keyframes showTable
+{
+    from {left: -100vw}
+    to {left:0}
+}

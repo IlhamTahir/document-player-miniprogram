@@ -1,3 +1,8 @@
+<view wx:if="{{showToc}}" class="table-of-content" bind:tap="toggleToc">
+    <view wx:for="{{ toc }}" wx:key="item.title" class="content-item {{ item.type }}" bind:tap="handlePage" data-page="{{ item.key }}">
+        {{item.title}}
+    </view>
+</view>
 <view class="document-player {{ isFullscreen ? 'fullscreen' : '' }}">
     <view class="pages">
         <scale-image wx:if="{{width}}" src="{{ item.load ? item.base64 : './assets/loading.gif' }}"
@@ -6,11 +11,11 @@
                      wx:key="{{item.page}}"
                      width="{{width}}"
                      height="{{height}}"
-                     class="{{ item.active ? 'active' : '' }}"
-        ></scale-image>
+                     class="{{ item.active ? 'active' : '' }}"></scale-image>
     </view>
     <view wx:if="{{!isFullscreen}}" class="toolbar">
         <view>
+            <view class="iconfont icon-page-list" bind:tap="toggleToc"></view>
         </view>
         <view>
             <view class="iconfont icon-page-first" hover-class='icon-hover' bind:tap="goFirst"></view>
@@ -24,22 +29,22 @@
             <view class="iconfont icon-fullscreen" wx:else style="margin-right: 5px;" bind:tap="onFullScreen"></view>
         </view>
     </view>
-        <view wx:if="{{isFullscreen}}" class="float-button-box" bind:tap="onFullScreen">
-            <view class="iconfont icon-fullscreen-exit"></view>
-            <view class="box-background"></view>
-        </view>
+    <view wx:if="{{isFullscreen}}" class="float-button-box" bind:tap="onFullScreen">
+        <view class="iconfont icon-fullscreen-exit"></view>
+        <view class="box-background"></view>
+    </view>
 
-        <view wx:if="{{isFullscreen}}" class="pages-float-button-box">
-            <view class="current-page">{{ position.page + '/' + totalPage }}</view>
-            <view class="box-background"></view>
-        </view>
+    <view wx:if="{{isFullscreen}}" class="pages-float-button-box">
+        <view class="current-page">{{ position.page + '/' + totalPage }}</view>
+        <view class="box-background"></view>
+    </view>
 
 
-        <view wx:if="{{isFullscreen}}" class="next-float-button-box">
-            <view class="iconfont icon-page-next" bind:tap="next"></view>
-        </view>
+    <view wx:if="{{isFullscreen}}" class="next-float-button-box">
+        <view class="iconfont icon-page-next" bind:tap="next"></view>
+    </view>
 
-        <view wx:if="{{isFullscreen}}" class="prev-float-button-box">
-            <view class="iconfont icon-page-prev" bind:tap="prev"></view>
-        </view>
+    <view wx:if="{{isFullscreen}}" class="prev-float-button-box">
+        <view class="iconfont icon-page-prev" bind:tap="prev"></view>
+    </view>
 </view>
