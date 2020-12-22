@@ -28,6 +28,9 @@ Component({
     },
     playPages: {
       type: Array
+    },
+    toc: {
+      type: Array
     }
   },
   data: {
@@ -39,41 +42,22 @@ Component({
     isEncrypted: true,
     width: 0,
     height: 0,
-    toc: [
-      {
-        title: '第二十章 抗肿瘤药物 (Anticancer Drugs)',
-        key: 1,
-        children: [{
-          title: '第一节 直接作用',
-          key: 1,
-          children: [{title: '一、烷化剂', key: 4, children: []}]
-        }]
-      },
-      {
-        title: '第二十一章 你好吗？',
-        key: 5,
-        children: []
-      }
-    ],
+    toc: [],
     showToc: false
   },
   lifetimes: {
     attached() {
       this._init()
       this.resize()
-      this.setData({
-        toc: this.reBuildToc()
-      })
     }
   },
   methods: {
     handlePage(e) {
-      console.log(e)
       this.goto({page: e.currentTarget.dataset.page})
     },
     reBuildToc() {
       const list = []
-      const toc = this.data.toc
+      const toc = this.properties.toc
       toc.forEach(item => {
         list.push({title: item.title, key: item.key, type: 'part'})
         if (item.children.length) {
@@ -87,7 +71,9 @@ Component({
           })
         }
       })
-      return list
+      this.setData({
+        toc: list
+      })
     },
     toggleToc() {
       this.setData({
@@ -115,6 +101,9 @@ Component({
         this.goto(this.properties.defaultPosition)
       } else {
         this.goto({page: 1})
+      }
+      if (this.properties.toc.length) {
+        this.reBuildToc()
       }
     },
     onFullScreen() {

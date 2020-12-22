@@ -8,6 +8,22 @@ Page({
       12,
       25
     ],
+    toc: [
+      {
+        title: '第二十章 抗肿瘤药物 (Anticancer Drugs)',
+        key: 1,
+        children: [{
+          title: '第一节 直接作用',
+          key: 1,
+          children: [{title: '一、烷化剂', key: 4, children: []}]
+        }]
+      },
+      {
+        title: '第二十一章 你好吗？',
+        key: 5,
+        children: []
+      }
+    ],
     showPageChange: false
   },
   onLoad(query) {

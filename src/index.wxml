@@ -15,7 +15,7 @@
     </view>
     <view wx:if="{{!isFullscreen}}" class="toolbar">
         <view>
-            <view class="iconfont icon-page-list" bind:tap="toggleToc"></view>
+            <view wx:if="{{toc.length}}" class="iconfont icon-page-list" bind:tap="toggleToc"></view>
         </view>
         <view>
             <view class="iconfont icon-page-first" hover-class='icon-hover' bind:tap="goFirst"></view>
