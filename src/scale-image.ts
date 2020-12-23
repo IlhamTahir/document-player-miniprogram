@@ -87,7 +87,7 @@ Component({
     },
     _resizeToWidth(targetWidth, targetHeight) {
       const width = this.properties.width
-      const height = (width * targetWidth) / targetHeight
+      const height = (width * targetHeight) / targetWidth
       this.setData({
         'touch.baseWidth': width,
         'touch.baseHeight': height,
