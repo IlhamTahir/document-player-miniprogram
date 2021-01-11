@@ -4,13 +4,16 @@ Component({
     src: String,
     custom_class: String,
     width: {
-      type: String,
-      observer(width) {
-        this.resize()
-      }
+      type: String
     },
     height: {
-      type: String
+      type: String,
+      observer(newVal) {
+        this.setData({
+          // eslint-disable-next-line radix
+          initOffset: ((parseInt(newVal) - this.data.touch.baseHeight) / 2)
+        })
+      }
     }
   },
   data: {
@@ -22,7 +25,8 @@ Component({
       baseHeight: '50%',
       scaleWidth: null,
       scaleHeight: null
-    }
+    },
+    initOffset: 0
   },
   lifetimes: {
     attached() {

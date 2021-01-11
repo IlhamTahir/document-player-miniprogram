@@ -164,8 +164,12 @@ scale-image {
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
-    padding: 180rpx 30rpx;
+    padding: 120rpx 30rpx;
     animation: showTable 0.5s;
+}
+
+.table-of-content .icon-close {
+    margin-bottom: 40rpx;
 }
 
 .table-of-content .content-item {

@@ -3,6 +3,10 @@
     height: 100%;
     display: flex;
     background: #3d454c;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow:hidden;white-space:nowrap;
 }
 
 .loading {
