@@ -1,4 +1,5 @@
 <view class="action-area">
     <button type="primary" bind:tap="toEncrypt">加密播放器</button>
     <button type="primary" bind:tap="toNoEncrypt">非加密播放器</button>
+    <button type="primary" bind:tap="toFullScreen">全屏播放效果</button>
 </view>

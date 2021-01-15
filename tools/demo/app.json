@@ -3,7 +3,8 @@
     "pages/index/index",
     "pages/encrypt/index",
     "pages/no-encrypt/index",
-    "pages/scale-image/index"
+    "pages/scale-image/index",
+    "pages/fullscreen/index"
   ],
   "window":{
     "backgroundTextStyle":"light",

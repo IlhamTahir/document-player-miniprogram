@@ -96,7 +96,8 @@ Component({
         'touch.baseWidth': width,
         'touch.baseHeight': height,
         'touch.scaleWidth': width,
-        'touch.scaleHeight': height
+        'touch.scaleHeight': height,
+        initOffset: height / 2
       })
     },
     _resizeToHeight(targetWidth, targetHeight) {

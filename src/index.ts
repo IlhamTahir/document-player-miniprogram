@@ -107,8 +107,10 @@ Component({
       }
     },
     onFullScreen() {
+      const status = !this.data.isFullscreen
+      this.triggerEvent('fullscreen-change', {status})
       this.setData({
-        isFullscreen: !this.data.isFullscreen
+        isFullscreen: status
       })
       this.resize()
     },
