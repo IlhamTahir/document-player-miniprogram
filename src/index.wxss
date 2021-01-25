@@ -37,7 +37,6 @@ scale-image {
 
 
 .toolbar {
-  height: 50px;
   background: #f3f3f3;
   border-top: 1px solid #ddd;
   display: flex;

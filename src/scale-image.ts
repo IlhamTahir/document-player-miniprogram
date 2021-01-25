@@ -31,8 +31,7 @@ Component({
   lifetimes: {
     attached() {
       this._resizeToWidth(this.properties.width, this.properties.height)
-    },
-
+    }
   },
   methods: {
     touchstartCallback(e) {
@@ -97,7 +96,7 @@ Component({
         'touch.baseHeight': height,
         'touch.scaleWidth': width,
         'touch.scaleHeight': height,
-        initOffset: height / 2
+        initOffset: (this.properties.height - height) / 2
       })
     },
     _resizeToHeight(targetWidth, targetHeight) {
