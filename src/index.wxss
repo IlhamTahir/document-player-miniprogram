@@ -158,7 +158,8 @@ scale-image {
     position: absolute;
     width: 100vw;
     min-height: 100vh;
-    z-index: 99999;
+    z-index: 99;
+    margin-top: 60rpx;
     background: #000;
     opacity: 0.8;
     color: #fff;
