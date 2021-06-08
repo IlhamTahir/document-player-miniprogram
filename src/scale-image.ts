@@ -46,6 +46,8 @@ Component({
       })
     },
     touchmoveCallback(e) {
+      const windowHeight = wx.getSystemInfoSync().windowHeight
+      const imgY = (windowHeight - this.data.touch.scaleHeight) / 2
       const touch = this.data.touch
       // 单手指缩放我们不做任何操作
       if (e.touches.length !== 2) return
@@ -59,8 +61,8 @@ Component({
       if (newScale >= 2) {
         newScale = 2
       }
-      if (newScale <= 0.6) {
-        newScale = 0.6
+      if (newScale <= 1) {
+        newScale = 1
       }
       const scaleWidth = newScale * touch.baseWidth
       const scaleHeight = newScale * touch.baseHeight
@@ -70,7 +72,8 @@ Component({
         'touch.scale': newScale,
         'touch.scaleWidth': scaleWidth,
         'touch.scaleHeight': scaleHeight,
-        'touch.diff': distanceDiff
+        'touch.diff': distanceDiff,
+        initOffset: imgY
       })
     },
     bindload(e) {

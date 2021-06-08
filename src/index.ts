@@ -24,10 +24,13 @@ Component({
       type: Object,
     },
     imageData: {
-      type: Array
+      type: Array,
+      observer: '__contentValue'
+
     },
     playPages: {
-      type: Array
+      type: Array,
+      observer: '__playPagesContent'
     },
     toc: {
       type: Array
@@ -52,6 +55,18 @@ Component({
     }
   },
   methods: {
+    __playPagesContent(newValue) {
+      if (newValue) {
+        this._init()
+        this.resize()
+      }
+    },
+    __contentValue(newValue) {
+      if (newValue) {
+        this._init()
+        this.resize()
+      }
+    },
     handlePage(e) {
       this.goto({page: e.currentTarget.dataset.page})
     },
@@ -221,7 +236,7 @@ Component({
         page = this.data.imageList.length
       }
 
-      if (this.data.position.page === page) {
+      if (this.data.position.page === page && page !== 1) {
         return
       }
 
