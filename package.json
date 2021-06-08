@@ -1,6 +1,6 @@
 {
   "name": "document-player-miniprogram",
-  "version": "1.4.6",
+  "version": "1.5.3",
   "description": "",
   "main": "miniprogram_dist/index.js",
   "scripts": {
@@ -67,6 +67,5 @@
     "webpack": "^4.29.5",
     "webpack-node-externals": "^1.7.2"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }

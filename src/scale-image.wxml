@@ -1,5 +1,5 @@
-<movable-area class="container" style="width: {{ touch.baseWidth }};height: {{ touch.baseHeight }};" scroll-x="true" scroll-y="true" enable-flex="true" bindtouchmove="touchmoveCallback" bindtouchstart="touchstartCallback">
-    <movable-view style="width: {{ touch.scaleWidth }}px;height: {{ touch.scaleHeight }}px" y="{{initOffset}}" direction="all">
+<movable-area bind:touchstart="touchstartCallback" bind:touchmove="touchmoveCallback" class="container" style="width: {{ touch.baseWidth }};height: {{ touch.baseHeight }};" scroll-x="true" scroll-y="true" enable-flex="true" >
+    <movable-view style="width: {{ touch.scaleWidth }}px;height: {{ touch.scaleHeight }}px" y="{{initOffset}}" x="24" direction="all" >
         <image src="{{ src }}" class="{{ isLoading ? 'loading': '' }}" style="width: {{ touch.scaleWidth }}px;height: {{ touch.scaleHeight }}px" bindload="bindload"></image>
     </movable-view>
 </movable-area>
