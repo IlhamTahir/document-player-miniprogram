@@ -2,6 +2,7 @@
 
 小程序文档播放器
 
+[![Build Status](https://app.travis-ci.com/IlhamTahir/document-player-miniprogram.svg?branch=master)](https://app.travis-ci.com/IlhamTahir/document-player-miniprogram)
 ## 特性
 * 支持加密图片解密播放
 * 支持非加密图片播放
