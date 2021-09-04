@@ -1,13 +1,14 @@
 {
-  "pages":[
-    "pages/index/index",
-    "pages/encrypt/index",
-    "pages/no-encrypt/index",
-    "pages/scale-image/index",
-    "pages/fullscreen/index"
-  ],
-  "window":{
-    "backgroundTextStyle":"light",
-    "navigationStyle": "custom"
-  }
+    "pages": [
+        "pages/index/index",
+        "pages/encrypt/index",
+        "pages/no-encrypt/index",
+        "pages/scale-image/index",
+        "pages/fullscreen/index"
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationStyle": "custom"
+    },
+    "sitemapLocation": "sitemap.json"
 }
