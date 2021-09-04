@@ -8,6 +8,8 @@
     "watch": "gulp watch --develop --watch",
     "build": "gulp",
     "dist": "npm run build",
+    "test": "jest --bail",
+    "test-debug": "node --inspect-brk ./node_modules/jest/bin/jest.js --runInBand --bail",
     "clean-dev": "gulp clean --develop",
     "clean": "gulp clean",
     "coverage": "jest ./test/* --coverage --bail",
